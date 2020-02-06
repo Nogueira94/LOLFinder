@@ -11,17 +11,18 @@ module.exports = {
 
     async store(request, response) { 
         const {name, mainRole, secRole, latitude, longitude} = request.body;
+        
+        const apiResponse = await axios.get(`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}${apikey}`) ;
+        
+        var id = apiResponse.data.id;
 
-        var user = await User.findOne({name});
+        console.log(apiResponse.data)
 
-        if (!user){ 
-            const apiResponse = await axios.get(`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}${apikey}`) ;
+        var user = await User.findOne({id});
 
-            console.log(apiResponse.data)
-            
-            var userId = apiResponse.data.id;
+        if (!user){             
 
-            const apiResponse2 = await axios.get(`https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/${userId}${apikey}`);
+            const apiResponse2 = await axios.get(`https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}${apikey}`);
 
             var unranked = apiResponse2.data.rank;
 
@@ -54,7 +55,7 @@ module.exports = {
                     "id": apiResponse.data.id,
                     "wins": null,
                     "losses": null,
-                    "rank": "Unranked",
+                    "rank": null,
                     "tier": null,
                     "mainRole": request.body.mainRole,
                     "secRole" : request.body.secRole,
@@ -64,19 +65,7 @@ module.exports = {
 
             console.log(newObject)
         
-            user = await User.create((newObject)
-                // name,
-                // profileIconId,
-                // summonerLevel,
-                // id,
-                // mainRole,
-                // secRole,
-                // wins,
-                // losses,
-                // rank,
-                // tier, 
-                // location
-            );
+            user = await User.create(newObject);
         };        
         return response.json(user);
     }
