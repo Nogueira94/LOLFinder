@@ -46,7 +46,7 @@ module.exports = {
 
             console.log(newObject)
         
-            user = await User.create({ 
+            user = await User.create((newObject), function (name,profileIconId,summonerLevel,id,mainRole,secRole,wins,losses,rank,tier,location){}
                 // name,
                 // profileIconId,
                 // summonerLevel,
@@ -58,7 +58,7 @@ module.exports = {
                 // rank,
                 // tier, 
                 // location
-            });
+            );
         };        
         return response.json(user);
     }
