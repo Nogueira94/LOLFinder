@@ -1,5 +1,3 @@
-// pasta models é a entidade que será armazenada no banco
-
 const mongoose = require('mongoose'); 
 const PointSchema = require('./utils/PointSchema');
 
@@ -8,11 +6,12 @@ const UserSchema = new mongoose.Schema({
     profileIconId : String,
     summonerLevel : String,
     id : String,
-    accountId : String,
-    wins : String,
-    losses : String,
+    wins : Number,
+    losses : Number,
     rank : String,
     tier : String,
+    mainRole: String,
+    secRole: String,
     location : {
         type: PointSchema,
         index: '2dsphere'

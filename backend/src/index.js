@@ -4,7 +4,7 @@ const routes = require('./routes'); // sempre que importar um export, por sempre
 
 const app = express(); // criação da variavel app chamando o express
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0-o4589.mongodb.net/omni?retryWrites=true&w=majority' , {
+mongoose.connect('mongodb+srv://admin:admin@cluster0-o4589.mongodb.net/lol?retryWrites=true&w=majority' , {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
