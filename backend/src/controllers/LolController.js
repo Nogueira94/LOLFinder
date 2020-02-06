@@ -1,6 +1,6 @@
 const axios = require('axios'); 
 const User = require('../models/Users'); 
-var apikey = '?api_key='+'RGAPI-746601d8-3304-4214-9cd0-d66e6f574a58';
+var apikey = '?api_key='+'RGAPI-f2c24940-579f-4966-ba13-b97e54d02dfd';
 
 module.exports = { 
 
@@ -10,12 +10,12 @@ module.exports = {
     },
 
     async store(request, response) { 
-        const {summonerName, mainRole, secRole, latitude, longitude} = request.body;
+        const {name, mainRole, secRole, latitude, longitude} = request.body;
 
-        const user = await User.findOne({summonerName});
+        var user = await User.findOne({name});
 
         if (!user){ 
-            const apiResponse = await axios.get(`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}${apikey}`) ;
+            const apiResponse = await axios.get(`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}${apikey}`) ;
 
             console.log(apiResponse.data)
             
@@ -30,7 +30,7 @@ module.exports = {
             coordinates: [longitude, latitude] 
             }
 
-            const newObject = {
+            var newObject = {
                 "name": apiResponse.data.name,
                 "profileIconId": apiResponse.data.profileIconId,
                 "summonerLevel": apiResponse.data.summonerLevel,
@@ -46,7 +46,7 @@ module.exports = {
 
             console.log(newObject)
         
-            user = await User.create((newObject), function (name,profileIconId,summonerLevel,id,mainRole,secRole,wins,losses,rank,tier,location){}
+            user = await User.create((newObject)
                 // name,
                 // profileIconId,
                 // summonerLevel,

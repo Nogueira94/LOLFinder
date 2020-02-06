@@ -1,7 +1,7 @@
 const mongoose = require('mongoose'); 
 const PointSchema = require('./utils/PointSchema');
 
-const UserSchema = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({
     name : String,
     profileIconId : String,
     summonerLevel : String,
