@@ -1,6 +1,6 @@
 const axios = require('axios'); 
 const User = require('../models/Users'); 
-var apikey = '?api_key='+'RGAPI-f2c24940-579f-4966-ba13-b97e54d02dfd';
+var apikey = '?api_key='+'RGAPI-f72a0f58-6605-4c2c-adca-4683e5c9e7bc';
 
 module.exports = { 
 

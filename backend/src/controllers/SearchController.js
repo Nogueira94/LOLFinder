@@ -1,19 +1,19 @@
 // criando controller para fazer busca pelo app, lembrar de criar apenas um index por controller
 
-const Dev = require('../models/Dev');
+const User = require('../models/Users');
 const parseStringAsArray = require ('../utils/parseStringAsArray')
 
 module.exports = {
     async index(request,response){
         //buscar todos Devs num raio de 10km
         // filtrar por techs
-        const { latitude , longitude , techs } = request.query;
+        const { latitude , longitude , mainRole, secRols } = request.query;
 
         const techsArray = parseStringAsArray(techs);
 
         // fazer filtro para encontrar devs
-        const devs = await Dev.find({
-            techs: {
+        const users = await User.find({
+            roles: {
                 $in: techsArray, // retornar apenas os devs que tem aquela tecnologia o $in é para verificar se tem as techs ou não (operators do mongo)
             },
             location : {
