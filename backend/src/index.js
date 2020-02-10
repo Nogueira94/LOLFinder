@@ -1,5 +1,6 @@
 const express = require('express'); // Express serve para conseguir colocar o sistema no ar
 const mongoose = require('mongoose'); // Lib para dar acesso ao node a base do mongo
+const cors = require('cors'); // lib para fazer a conexão do backend com o front
 const routes = require('./routes'); // sempre que importar um export, por sempre o caminho do arquivo, senão o programa ira procurar no node_modules o nome
 
 const app = express(); // criação da variavel app chamando o express
@@ -9,6 +10,7 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0-o4589.mongodb.net/omni?retr
     useUnifiedTopology: true,
 });
 
+app.use(cors({origin: 'http://localhost:3000'})) 
 app.use(express.json());  // definir para o express entender o JSON, lembrar de por o json sempre antes do routes, pois o node le de forma linear
 app.use(routes); // recadastrar as rotas no index
 
