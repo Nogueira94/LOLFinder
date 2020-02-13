@@ -22,7 +22,7 @@ li.dev-item{
     border-radius: 2px;
     padding: 20px;
     align-items: center;
-    word-break: break-all;
+    word-break: keep-all;
 
 
 }

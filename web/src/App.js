@@ -10,7 +10,7 @@ import './Sidebar.css';
 import './Main.css';
 
 function App(){
-  const [devs, setDevs] = useState('');
+  const [devs, setDevs] = useState([]);
   const [github_username,setGithubUsername] = useState('');
   const [techs, setTechs] = useState('');
   const [latitude,setLatitude] = useState('');
@@ -32,14 +32,14 @@ function App(){
     )
   }, []);
 
-useEffect(() => {
-  async function loadDevs() {
-    const response = await api.get('/devs');
+  useEffect(() => {
+    async function loadDevs() {
+      const response = await api.get('/devs');
 
-    setDevs(response.data);
-  }
-  loadDevs();
-}, [])
+      setDevs(response.data);
+    }
+    loadDevs();
+  }, []);
 
   async function handleAddDev(e){
     e.preventDefault(); // previne que qnd o usuario clicar no submit mudar de pagina no html
@@ -103,7 +103,7 @@ useEffect(() => {
               <p>{dev.bio}</p>
               <a href={`https://github.com/${dev.github_username}`}>Acessar Perfil</a>
             </li>
-          ))};
+          ))}
         </ul>
       </main>
     </div>
