@@ -15,7 +15,7 @@ module.exports = {
     async store(request, response) { // buscas em outras API podem demorar, então colocar como async (store é o nome da função)
         const {github_username, techs, latitude, longitude} = request.body; // buscando a informação github_username e techs de dentro do request body
     
-        const dev = await Dev.findOne({github_username}); // verifica se o github_username ja existe no banco
+        var dev = await Dev.findOne({github_username}); // verifica se o github_username ja existe no banco
 
         if (!dev){ // se dev não existir ira cadastrar
             const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`) // a resposta da chamada API será ( utilizar ` no lugar da barra simples, para conseguir colocar variaveis dentro da string )
